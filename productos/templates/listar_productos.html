@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %} Listar Productos {% endblock %}
+
+{% block content %}
+<h1>Lista de Productos</h1>
+
+<div class="text-end">
+    <a href="{% url 'crear_producto' %}" class="btn btn-primary mb-3"><i class='bx bx-plus'></i>Crear Nuevo Producto</a>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="productosTable" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Nombre</th>
+                            <th class="text-center">Precio</th>
+                            <th class="text-center">Cantidad</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        {% for producto in productos %}
+                        <tr>
+                            <td>{{ producto.nombre }}</td>
+                            <td>{{ producto.precio }}</td>
+                            <td>{{ producto.cantidad }}</td>
+                            <td class="text-end">
+                                <a href="{% url 'detalle_producto' producto.id %}" class="btn btn-info btn-sm"><i class='bx bx-book-reader' ></i> Leer</a>
+                                <a href="{% url 'actualizar_producto' producto.id %}" class="btn btn-warning btn-sm"><i class='bx bx-loader-alt' ></i> Actualizar</a>
+                                <a href="{% url 'eliminar_producto' producto.id %}" class="btn btn-danger btn-sm"><i class='bx bx-x'></i> Eliminar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
